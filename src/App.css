@@ -24,14 +24,14 @@
 
 .userList {
   
-  max-height: 50em;
+  max-height: 80vh;
   overflow: auto;
-
 }
 
 .userInfo {
   max-width: 200px;
-  float: right;
-  margin-right: 45%;
+  display: inline-block;
+  vertical-align: top;
   text-align: center;
+  margin-left: 5em;
 }
