@@ -4,12 +4,62 @@ import './App.css';
 import { Box, Button, Card, CardActions, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, MenuItem, TextField, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { borderRadius } from '@mui/system';
+import UserCard from './components/UserCard';
+
+
+export type User = {
+  name: string,
+  surname: string,
+  email: string,
+  office: string,
+  id: number,
+}
+
+const mockUsers: User[] = [
+  {
+    name: "asd1",
+    surname: "qwe1",
+    email: "asd1@asd1",
+    office: "office1",
+    id: 0,
+  },
+  {
+    name: "asd2",
+    surname: "qwe2",
+    email: "asd2@asd2",
+    office: "office2",
+    id: 1,
+  },
+  {
+    name: "asd2",
+    surname: "qwe2",
+    email: "asd2@asd2",
+    office: "office2",
+    id: 2,
+  },
+  {
+    name: "asd2",
+    surname: "qwe2",
+    email: "asd2@asd2",
+    office: "office2",
+    id: 3,
+  },
+  {
+    name: "asd2",
+    surname: "qwe2",
+    email: "asd2@asd2",
+    office: "office2",
+    id: 4,
+  }
+]
 
 function App() {
 
   const [dialogOpen, setOpen] = useState(false);
 
   const [office, setOffice] = useState("")
+
+  const [users, setUsers] = useState(mockUsers)
 
   const offices = [
     {
@@ -22,6 +72,16 @@ function App() {
       name: "office3"
     }
   ]
+
+
+  const deleteUser = (userToDelete: User) => {
+
+    if (window.confirm("Are you sure you want to delete the user?")){
+      setUsers(users.filter((user) => {
+        return user.id !== userToDelete.id
+      }))
+    }
+  }
 
   return (
     <div className="App">
@@ -67,71 +127,9 @@ function App() {
           </Dialog>
           </div>
           <div className="userList">
-          <Card variant="outlined" sx={{ maxWidth: 250 }}>
-            <CardContent>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button size="small" variant="outlined">Muokkaa</Button>
-              <Button size="small" variant="outlined" startIcon={<DeleteIcon />}>Poista</Button>
-            </CardActions>
-          </Card>
-          <Card variant="outlined" sx={{ maxWidth: 250 }}>
-            <CardContent>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button size="small">Muokkaa</Button>
-              <Button size="small">Poista</Button>
-            </CardActions>
-          </Card>
-          <Card variant="outlined" sx={{ maxWidth: 250 }}>
-            <CardContent>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button size="small">Muokkaa</Button>
-              <Button size="small">Poista</Button>
-            </CardActions>
-          </Card>
-          <Card variant="outlined" sx={{ maxWidth: 250 }}>
-            <CardContent>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button size="small">Muokkaa</Button>
-              <Button size="small">Poista</Button>
-            </CardActions>
-          </Card>
-          <Card variant="outlined" sx={{ maxWidth: 250 }}>
-            <CardContent>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-              <Typography>Etunimi: asdasd</Typography>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button size="small">Muokkaa</Button>
-              <Button size="small">Poista</Button>
-            </CardActions>
-          </Card>
+            {users.map((user) => (
+              <UserCard userInfo={user} deleteUser={deleteUser} />
+            ))}
           </div>
         </div>
         <div className="userInfo">
